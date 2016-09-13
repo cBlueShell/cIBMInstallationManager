@@ -1,0 +1,8 @@
+# Mac Files
+**/.DS_Store
+
+# DSC
+*.mof
+
+# TEST
+TestResults_*
