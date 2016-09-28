@@ -1,10 +1,6 @@
 # Import IBM Installation Manager Utils Module
-Import-Module $PSScriptRoot\cIBMInstallationManagerUtils.psm1 -ErrorAction Stop
-
-enum Ensure {
-    Absent
-    Present
-}
+Using Module BlueShellUtils
+Import-Module $PSScriptRoot\IBMIM\IBMIM.psm1 -ErrorAction Stop
 
 <#
    DSC resource to manage the installation of IBM Installation Manager.
@@ -81,7 +77,6 @@ class cIBMInstallationManager {
     #>
     [bool] Test () {
         Write-Verbose "Checking for IBM Installation Manager installation"
-        if(Test-IBMPSDscSequenceDebug){return $True}
         $iimConfiguredCorrectly = $false
         $iimRsrc = $this.Get()
         
@@ -118,16 +113,16 @@ class cIBMInstallationManager {
         $RetVersion = $null
         $RetTempDir = $null
         
-        $iimRegistryPath = Get-IBMInstallationManagerRegistryPath
+        $iimHome = Get-IBMInstallationManagerHome
 
-        if((Test-Path($this.InstallationDirectory)) -and ($iimRegistryPath) -and (Test-Path($iimRegistryPath))) {
+        if((Test-Path($this.InstallationDirectory)) -and ($iimHome) -and (Test-Path($iimHome))) {
             $iimSWTagFile = Join-Path -Path $this.InstallationDirectory -ChildPath "properties\version\*.swtag"
             if(Test-Path($iimSWTagFile)) {
                 Write-Debug "IBM Installation Manager is Present"
                 $RetEnsure = [Ensure]::Present
-                $RetInsDir = (Get-ItemProperty($iimRegistryPath)).location
+                $RetInsDir = $iimHome
                 Write-Debug "IBM Installation Manager Directory: $RetInsDir"
-                $RetVersion = (Get-ItemProperty($iimRegistryPath)).version
+                $RetVersion = Get-IBMInstallationManagerVersion
                 Write-Debug "IBM Installation Manager Version: $RetVersion"
                 $RetTempDir = Get-IBMInstallationManagerTempDir
             }

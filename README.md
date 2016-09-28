@@ -26,6 +26,10 @@ DSC Resource or by leveraging the [x7Zip DSC Module](https://www.powershellgalle
 
 ## Versions
 
+### 1.1.0
+* Adds appveyor integration
+* Creates base DSC resource for installing IBM products
+
 ### 1.0.5/1.0.6
 * Minor fixes
 

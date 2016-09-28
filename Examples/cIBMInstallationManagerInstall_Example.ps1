@@ -2,7 +2,8 @@
 
 Configuration IIM
 {
-    Import-DSCResource -module cIBMInstallationManager -ModuleVersion '1.0.6'
+    Import-DSCResource -module cIBMInstallationManager
+
     Package SevenZip {
         Ensure = 'Present'
         Name = '7-Zip 9.20 (x64 edition)'
@@ -13,8 +14,8 @@ Configuration IIM
     {
         Ensure = 'Present'
         InstallationDirectory = 'C:\IBM\IIM'
-        Version = '1.8.3'
-        SourcePath = 'C:\Media\agent.installer.win32.win32.x86_1.8.3000.20150606_0047.zip'
+        Version = '1.8.4.1'
+        SourcePath = 'C:\Media\IBM\InstallationManager\agent.installer.win32.win32.x86_64_1.8.4001.20160217_1716.zip'
         DependsOn= "[Package]SevenZip"
     }
 }

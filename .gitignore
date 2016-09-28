@@ -6,3 +6,6 @@
 
 # TEST
 TestResults_*
+
+# Build Dir
+Artifact/*

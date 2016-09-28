@@ -9,7 +9,7 @@
 RootModule = 'cIBMInstallationManager.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.0.7'
+ModuleVersion = '1.1.0'
 
 # ID used to uniquely identify this module
 GUID = 'fc4c2ed1-00c4-4fee-93c8-13447d062921'
@@ -18,7 +18,7 @@ GUID = 'fc4c2ed1-00c4-4fee-93c8-13447d062921'
 # ScriptsToProcess = @()
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
-NestedModules = @('cIBMInstallationManagerUtils')
+NestedModules = @('IBMIM')
 
 # DSC resources to export from this module
 DscResourcesToExport = 'cIBMInstallationManager'
@@ -42,7 +42,7 @@ ProcessorArchitecture = 'None'
 PowerShellVersion = '5.0'
 
 # Modules that must be imported into the global environment prior to importing this module
-RequiredModules = @('xPSDesiredStateConfiguration', 'BlueShellUtils')
+RequiredModules = @('BlueShellUtils','IBMProductMedia')
 
 # Name of the Windows PowerShell host required by this module
 # PowerShellHostName = ''
@@ -66,7 +66,10 @@ RequiredModules = @('xPSDesiredStateConfiguration', 'BlueShellUtils')
 # FormatsToProcess = @()
 
 # Functions to export from this module
-FunctionsToExport = '*'
+FunctionsToExport = @('ConvertTo-HashedPassword','Get-IBMInstallationManagerHome','Get-IBMInstallationManagerTempDir',
+    'Get-IBMInstallationManagerVersion','Get-IBMTempDir','Install-IBMInstallationManager','Install-IBMProduct',
+    'Install-IBMProductViaCmdLine','Install-IBMProductViaResponseFile','New-IBMInstallationManagerResponseFile',
+    'Set-IBMInstallationManagerTempDir','Update-IBMInstallationManager')
 
 # Cmdlets to export from this module
 CmdletsToExport = '*'
