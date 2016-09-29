@@ -79,7 +79,11 @@ Function Install-IBMProduct() {
                 if ($installed) {
                     Remove-ItemBackground -Path $ibmprodTempDir
                 }
+            } else {
+                Write-Error "Error occured creating response file from template $ResponseFileTemplate"
             }
+        } else {
+            Write-Error "Error occured while extracting media from $SourcePath to $ibmprodTempDir"
         }
     }
     
