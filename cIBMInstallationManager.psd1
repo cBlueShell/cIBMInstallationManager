@@ -66,19 +66,16 @@ RequiredModules = @('BlueShellUtils','IBMProductMedia')
 # FormatsToProcess = @()
 
 # Functions to export from this module
-FunctionsToExport = @('ConvertTo-HashedPassword','Get-IBMInstallationManagerHome','Get-IBMInstallationManagerTempDir',
-    'Get-IBMInstallationManagerVersion','Get-IBMTempDir','Install-IBMInstallationManager','Install-IBMProduct',
-    'Install-IBMProductViaCmdLine','Install-IBMProductViaResponseFile','New-IBMInstallationManagerResponseFile',
-    'Set-IBMInstallationManagerTempDir','Update-IBMInstallationManager')
+FunctionsToExport = @('ConvertTo-HashedPassword','Get-IBMInstallationManagerHome','Get-IBMInstallationManagerTempDir','Get-IBMInstallationManagerVersion','Get-IBMTempDir','Install-IBMInstallationManager','Install-IBMProduct','Install-IBMProductViaCmdLine','Install-IBMProductViaResponseFile','New-IBMInstallationManagerResponseFile','Set-IBMInstallationManagerTempDir','Update-IBMInstallationManager')
 
 # Cmdlets to export from this module
-CmdletsToExport = '*'
+# CmdletsToExport = '*'
 
 # Variables to export from this module
-VariablesToExport = '*'
+# VariablesToExport = '*'
 
 # Aliases to export from this module
-AliasesToExport = '*'
+# AliasesToExport = '*'
 
 # List of all modules packaged with this module
 # ModuleList = @()

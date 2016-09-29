@@ -108,10 +108,11 @@ class cIBMInstallationManager {
         installation of IBM Installation Manager
     #>
     [cIBMInstallationManager] Get () {
-        $RetEnsure = [Ensure]::Absent
-        $RetInsDir = $null
-        $RetVersion = $null
-        $RetTempDir = $null
+        $CurrentRsrc = [cIBMInstallationManager]::new()
+        $CurrentRsrc.Ensure = [Ensure]::Absent
+        $CurrentRsrc.InstallationDirectory = $null
+        $CurrentRsrc.Version = $null
+        $CurrentRsrc.TempDir = $null
         
         $iimHome = Get-IBMInstallationManagerHome
 
@@ -119,24 +120,17 @@ class cIBMInstallationManager {
             $iimSWTagFile = Join-Path -Path $this.InstallationDirectory -ChildPath "properties\version\*.swtag"
             if(Test-Path($iimSWTagFile)) {
                 Write-Debug "IBM Installation Manager is Present"
-                $RetEnsure = [Ensure]::Present
-                $RetInsDir = $iimHome
-                Write-Debug "IBM Installation Manager Directory: $RetInsDir"
-                $RetVersion = Get-IBMInstallationManagerVersion
-                Write-Debug "IBM Installation Manager Version: $RetVersion"
-                $RetTempDir = Get-IBMInstallationManagerTempDir
+                $CurrentRsrc.Ensure = [Ensure]::Present
+                $CurrentRsrc.InstallationDirectory = $iimHome
+                Write-Debug "IBM Installation Manager Directory: $($CurrentRsrc.InstallationDirectory)"
+                $CurrentRsrc.Version = Get-IBMInstallationManagerVersion
+                Write-Debug "IBM Installation Manager Version: $($CurrentRsrc.Version)"
+                $CurrentRsrc.TempDir = Get-IBMInstallationManagerTempDir
             }
         } else {
             Write-Verbose "IBM Installation Manager is NOT Present"
         }
 
-        $returnValue = @{
-            InstallationDirectory = $RetInsDir
-            Version = $RetVersion
-            Ensure = $RetEnsure
-            TempDir = $RetTempDir
-        }
-
-        return $returnValue
+        return $CurrentRsrc
     }
 }

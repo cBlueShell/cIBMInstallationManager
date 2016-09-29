@@ -4,6 +4,7 @@
 ##############################################################################################################
 Function Install-IBMProduct() {
     [CmdletBinding(SupportsShouldProcess=$False)]
+    [OutputType([Boolean])]
     param (
         [parameter(Mandatory = $true)]
 		[System.String]
@@ -52,8 +53,7 @@ Function Install-IBMProduct() {
             }
             New-Item -ItemType Directory -Path $ibmprodTempDir | Out-Null
             $sizeNeededInMB = (($productMediaConfig.GetTotalSizeOnDisk()+500MB)/1MB)
-            $targetDrive = ((Get-Item $ibmprodTempDir).PSDrive.Name + ":")
-            $sizeAvailable = ((Get-WmiObject Win32_LogicalDisk -Filter "DeviceID='$targetDrive'").FreeSpace / 1MB)
+            $sizeAvailable = (Get-PSDrive ((Get-Item $ibmprodTempDir).PSDrive.Name) | Select-Object Free).Free/1MB
             if ($sizeNeededInMB -ge $sizeAvailable) {
                 Write-Error "Insufficient disk space to extract the product media, size needed: $sizeNeededInMB MB size available: $sizeAvailable MB"
                 Return $false

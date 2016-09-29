@@ -21,7 +21,7 @@ Properties {
     }
 }
 
-Task Default -depends Init, Test, Build, Deploy
+Task Default -depends Init, Analyze, Test, Build, Deploy
 
 Task Init {
     $lines
@@ -71,7 +71,7 @@ Task Analyze {
     "`n"
 }
 
-Task Test -Depends Init  {
+Task Test -Depends Init, Analyze {
     $lines
     "`n`tSTATUS: Testing with PowerShell $PSVersion"
 
@@ -111,6 +111,14 @@ Task Build -Depends Test {
 
 Task Deploy -Depends Build {
     $lines
+
+    # Deploy to PS Gallery
+    $Params = @{
+        Path = $ProjectRoot
+        Force = $true
+        Recurse = $false # We keep psdeploy artifacts, avoid deploying those : )
+    }
+    Invoke-PSDeploy @Verbose @Params
 
     # Create a clean to build the artifact
     $artifactDir = "$PSScriptRoot\Artifact"

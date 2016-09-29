@@ -12,7 +12,7 @@ Function Get-IBMInstallationManagerTempDir() {
     if ($iimHome) {
         $iimIniPath = Join-Path -Path $iimHome -ChildPath "eclipse\IBMIM.ini"
         if (Test-Path $iimIniPath) {
-            $iniFile = gc $iimIniPath
+            $iniFile = Get-Content $iimIniPath
             [string] $tmpdirJavaOption = "-Djava.io.tmpdir"
             foreach($line in $iniFile) {
                 if ($line.Contains($tmpdirJavaOption)) {

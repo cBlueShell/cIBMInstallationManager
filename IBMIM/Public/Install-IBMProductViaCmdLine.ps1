@@ -4,6 +4,7 @@
 ##############################################################################################################
 Function Install-IBMProductViaCmdLine() {
     [CmdletBinding(SupportsShouldProcess=$False)]
+    [OutputType([Boolean])]
     param (
         [parameter(Mandatory = $true)]
 		[System.String]

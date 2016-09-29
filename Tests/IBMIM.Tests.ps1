@@ -36,3 +36,28 @@ Describe "IBMIM Sub-Module PS$PSVersion" {
         }
     }
 }
+
+<#Describe "ConvertTo-HashedPassword PS$PSVersion" {
+    Context "When a good password is provided" {
+        Mock -ModuleName $ModuleName Get-IBMInstallationManagerHome {
+            $iimcPath = Join-Path -Path $env:TEMP -ChildPath "eclipse"
+            New-Item -ItemType Directory -Force -Path $iimcPath | Out-Null
+            New-Item -ItemType File -Force -Path "$iimcPath\IBMIMc.exe" | Out-Null
+            Return $env:TEMP
+        }
+        Mock Invoke-ProcessHelper {
+            Return @{
+                StdOut = "HASHED"
+                ExitCode = 0
+            }
+        }
+        It 'Should be able to generate a hashed password' {
+            $cred = New-Object System.Management.Automation.PSCredential("testuser", "Passw0rd" | ConvertTo-SecureString -asPlainText -Force)
+            $x = ConvertTo-HashedPassword -UserCredential $cred -Verbose
+            Assert-MockCalled Invoke-ProcessHelper
+            Assert-MockCalled Get-IBMInstallationManagerHome
+            Write-Output $x
+            $x -eq "HASHED" | Should Be $True
+        }
+    }
+}#>

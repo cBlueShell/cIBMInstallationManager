@@ -4,6 +4,7 @@
 ##############################################################################################################
 Function Invoke-IBMInstallationManagerCmdLine() {
     [CmdletBinding(SupportsShouldProcess=$False)]
+    [OutputType([Boolean])]
     param (
         [parameter(Mandatory=$true,position=0)]
 		[System.String[]]
