@@ -13,7 +13,9 @@ $modulesToInstall = @(
     'Psake',
     'BuildHelpers',
     'PSDeploy',
-    'PSScriptAnalyzer'
+    'PSScriptAnalyzer',
+    'BlueShellUtils',
+    'IBMProductMedia'
 )
 
 ForEach ($module in $modulesToInstall) {
