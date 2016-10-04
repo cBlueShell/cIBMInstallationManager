@@ -13,7 +13,7 @@ Properties {
     $lines = '----------------------------------------------------------------------'
 
     # List of the PowerShell scripts to test
-    $filesToTest = Get-ChildItem *.psm1,*.psd1,*.ps1 -Recurse -Exclude *build.ps1,*.pester.ps1,*Tests.ps1,*psake.ps1,*.psdeploy.ps1
+    $filesToTest = Get-ChildItem *.psm1,*.psd1,*.ps1 -Recurse -Exclude *build.ps1,*.pester.ps1,*.Tests.ps1,*psake.ps1,*.psdeploy.ps1,*_Example.ps1 | Where {$_.FullName -notlike "*\Artifact\*"}
 
     $Verbose = @{}
     if($ENV:BHCommitMessage -match "!verbose") {
@@ -128,7 +128,7 @@ Task Deploy -Depends Build {
     New-Item -Path $artifactDir -ItemType Directory -Force
 
     # Copy the correct items into the artifacts directory, filtering out the junk
-    Start-Process -FilePath 'robocopy.exe' -ArgumentList "`"$($PSScriptRoot)`" `"$($PSScriptRoot)\Artifact\cIBMInstallationManager`" /S /R:1 /W:1 /XD Artifact .kitchen .git /XF .gitignore build.ps1 psake.ps1 *.yml *.xml" -Wait -NoNewWindow
+    Start-Process -FilePath 'robocopy.exe' -ArgumentList "`"$($PSScriptRoot)`" `"$($PSScriptRoot)\Artifact\cIBMInstallationManager`" /S /R:1 /W:1 /XD Artifact .kitchen .git /XF .gitignore build.ps1 psake.ps1 deploy.psdeploy.ps1 *.Tests.ps1 *.yml *.xml" -Wait -NoNewWindow
 
     # Create a zip file artifact
     Compress-Archive -Path $PSScriptRoot\Artifact\cIBMInstallationManager -DestinationPath $PSScriptRoot\Artifact\cIBMInstallationManager-$build_version.zip -Force
