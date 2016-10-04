@@ -1,4 +1,7 @@
-#cIBMInstallationManager
+cIBMInstallationManager
+========================
+
+[![Build status](https://ci.appveyor.com/api/projects/status/ww3rfqhucn5w6a8o/branch/master?svg=true)](https://ci.appveyor.com/project/dennypc/cibminstallationmanager/branch/master)
 
 PowerShell CmdLets and Class-Based DSC resources to manage IBM Installation Manager on Windows Environments.
 
