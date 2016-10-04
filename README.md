@@ -21,8 +21,8 @@ PS> Install-Module -Name cIBMInstallationManager
 * **TempDir**: Overrides default Temp Folder used by IBM Installation Manager. Useful when Antivirus monitors the default folders and lock onto the temp files.  
 
 ## Depedencies
-[7-Zip](http://www.7-zip.org/ "7-Zip") needs to be installed on the target machine.  You can add 7-Zip to your DSC configuration by using the Package
-DSC Resource or by leveraging the [x7Zip DSC Module](https://www.powershellgallery.com/packages/x7Zip/ "x7Zip at PowerShell Gallery")
+- [BlueShellUtils](https://www.powershellgallery.com/packages/blueshellutils/ "BlueShellUtils") - General Utility methods
+- [IBMProductMedia](https://www.powershellgallery.com/packages/IBMProductMedia/ "IBMProductMedia") - IBM Media Data Model
 
 ## Versions
 

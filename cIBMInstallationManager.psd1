@@ -21,7 +21,7 @@ GUID = 'fc4c2ed1-00c4-4fee-93c8-13447d062921'
 NestedModules = @('IBMIM')
 
 # DSC resources to export from this module
-DscResourcesToExport = 'cIBMInstallationManager'
+DscResourcesToExport = @('cIBMInstallationManager')
 
 # Author of this module
 Author = 'Denny Pichardo'
@@ -42,7 +42,10 @@ ProcessorArchitecture = 'None'
 PowerShellVersion = '5.0'
 
 # Modules that must be imported into the global environment prior to importing this module
-RequiredModules = @('BlueShellUtils','IBMProductMedia')
+RequiredModules = @(
+    @{ ModuleName = 'BlueShellUtils'; ModuleVersion = '0.0.7'},
+    @{ ModuleName = 'IBMProductMedia'; ModuleVersion = '0.0.2'}
+)
 
 # Name of the Windows PowerShell host required by this module
 # PowerShellHostName = ''
