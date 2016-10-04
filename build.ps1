@@ -20,7 +20,7 @@ $modulesToInstall = @(
 
 ForEach ($module in $modulesToInstall) {
     if (!(Get-Module -Name $module -ListAvailable)) {
-        Install-Module -Name $module -Force -Scope CurrentUser
+        Install-Module -Name $module -Force -Scope CurrentUser -AllowClobber
     }
 }
 
